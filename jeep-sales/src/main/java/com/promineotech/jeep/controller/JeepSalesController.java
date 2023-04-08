@@ -19,8 +19,8 @@ import io.swagger.v3.oas.annotations.servers.Server;
 
 
 
-@OpenAPIDefinition(info = @Info(title = "Jeep Sales Service"), servers = {
-    @Server(url = "http://localhost:8080", description = "Local server")})
+@OpenAPIDefinition(info = @Info(title = "Jeep Sales Service"), servers = {@Server(url = 
+                  "http://localhost:8080", description = "Local server.")})
 
 @RequestMapping("/jeeps")
 public interface JeepSalesController {
@@ -60,6 +60,7 @@ public interface JeepSalesController {
               required = false,
               description = "The trim level (i.e., 'Sport')")
       }
+      
       )
   
   @GetMapping
