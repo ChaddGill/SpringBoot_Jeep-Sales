@@ -5,16 +5,14 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import lombok.Getter;
 
-
 public class BaseTest {
-
   @LocalServerPort
   protected int serverPort;
   
   @Autowired
   @Getter
-  protected TestRestTemplate restTemplate;
-  
+  protected TestRestTemplate restTemplate;  
+    
   protected String getBaseUri() {
     return String.format("http://localhost:%d/jeeps", serverPort);
   }
