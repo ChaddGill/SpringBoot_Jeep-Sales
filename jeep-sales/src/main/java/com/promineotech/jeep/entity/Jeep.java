@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Jeep implements Comparable<Jeep>{
   private Long modelPK;
   private JeepModel modelId;
@@ -19,7 +20,7 @@ public class Jeep implements Comparable<Jeep>{
   private int numDoors;
   private int wheelSize;
   private BigDecimal basePrice;
-  
+
   @JsonIgnore
   public Long getModelPK() {
     return modelPK;
@@ -27,12 +28,12 @@ public class Jeep implements Comparable<Jeep>{
 
   @Override
   public int compareTo(Jeep that) {
-    // @formatter:off
+    //@formatter:off
     return Comparator
         .comparing(Jeep::getModelId)
         .thenComparing(Jeep::getTrimLevel)
         .thenComparing(Jeep::getNumDoors)
         .compare(this, that);
-    // @formatter:on
+    //@formatter:on
   }
 }

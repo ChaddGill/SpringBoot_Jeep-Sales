@@ -27,53 +27,52 @@ import io.swagger.v3.oas.annotations.servers.Server;
     @Server(url = "http://localhost:8080", description = "Local server.")})
 public interface JeepSalesController {  
 
-  // @formatter:off
-  @Operation(
-      summary = "Returns a list of Jeeps",
-      description = "Returns a list of Jeeps given an optional model and/or trim",
-      responses = {
-          @ApiResponse(
-              responseCode = "200",
-              description = "A list of Jeeps is returned",
-              content = @Content(
-                  mediaType = "application/json",
-                  schema = @Schema(implementation = Jeep.class))),
-          @ApiResponse(
-              responseCode = "400",
-              description = "The request parameters are invalid",
-              content = @Content(mediaType = "application/json")),
-          @ApiResponse(
-              responseCode = "404",
-              description = "No Jeeps were found with the input criteria",
-              content = @Content(mediaType = "application/json")),
-          @ApiResponse(
-              responseCode = "500",
-              description = "An unplanned error occurred.",
-              content = @Content(mediaType = "application/json"))
-      },
-      parameters = {
-          @Parameter(
-              name = "model",
-              allowEmptyValue = false,
-              required = false,
-              description = "The model name (i.e., 'WRANGLER')"),
-          @Parameter(
-              name = "trim",
-              allowEmptyValue = false,
-              required = false,
-              description = "The trim level (i.e., 'Sport')")
-      }
-      
-      )
+	//@formatter:off
+	  @Operation(
+	      summary = "Returns a list of Jeeps",
+	      description = "Returns a list of Jeeps given an optional model and/or trim",
+	      responses = {
+	          @ApiResponse(
+	              responseCode = "200", 
+	              description = "A list of Jeeps is returned", 
+	              content = @Content(
+	                  mediaType = "application/json", 
+	                  schema = @Schema(implementation = Jeep.class))),
+	          @ApiResponse(
+	              responseCode = "400", 
+	              description = "Request parameters are invalid", 
+	              content = @Content(mediaType = "application/json")),
+	          @ApiResponse(
+	              responseCode = "404", 
+	              description = "No Jeeps were found with the input criteria", 
+	              content = @Content(mediaType = "application/json")),
+	          @ApiResponse(
+	              responseCode = "500", 
+	              description = "An unplanned error ocurred.", 
+	              content = @Content(mediaType = "application/json"))
+	      },
+	      parameters = {
+	          @Parameter(
+	              name = "model", 
+	              allowEmptyValue = false, 
+	              required = false, 
+	              description = "The model name (i.e, 'WRANGLER')"),
+	          @Parameter(
+	              name = "trim", 
+	              allowEmptyValue = false, 
+	              required = false, 
+	              description = "The trim model (i.e, 'Sport')")
+	      }
+	  )
   
   @GetMapping
   @ResponseStatus(code = HttpStatus.OK)
-  List<Jeep> fetchJeeps(      
+  List<Jeep> fetchJeeps(
+      @RequestParam(required = false) 
+        JeepModel model,
+        @Length(max = Constants.TRIM_MAX_LENGTH)
+        @Pattern(regexp = "[\\w\\s]*")
       @RequestParam(required = false)
-          JeepModel model,
-      @Length(max = Constants.TRIM_MAX_LENGTH)
-      @Pattern(regexp = "[\\w\\s]*")
-      @RequestParam(required = false)
-          String trim);
-//@formatter:on
+        String trim);
+  //@formatter:on
 }
